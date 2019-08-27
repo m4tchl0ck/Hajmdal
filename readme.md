@@ -20,6 +20,6 @@ How to recognize registrations on [Raspberry Pi] (https://www.raspberrypi.org/),
 
 1. [Environment configuration](gitlab-runner)
 2. [We're taking a picture](take-a-photo.md)
-3. We read the registration from the photo
+3. [We read the registration from the photo](read-the-plates.md)
 4. We display the status on GPIO (We open the barrier)
 5. Check if the registration is in the file
