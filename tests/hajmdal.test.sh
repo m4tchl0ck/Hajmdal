@@ -2,6 +2,20 @@
 
 TEST_CASES=( )
 
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_create_a_photo_file_when_take_a_photo_is_called
+hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
+{
+    local result=$($SUT take_a_photo 2>&1)
+
+    if [ -e "./img.jpg" ]; then
+        true
+    else
+        echo "File './img.jpg' not exists" >&2
+        echo "$result" >&2
+        false
+    fi
+}
+
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_error_when_not_know_operation_is_called
 hajmdal_should_write_error_when_not_know_operation_is_called()
 {
