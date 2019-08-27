@@ -49,9 +49,15 @@ assert_equal()
 
 ########################################
 
-RESULT=tests-results.txt
+RESULTS_PATH="tests-results"
+RESULT="$RESULTS_PATH/results.txt"
 SUT="scripts/hajmdal.sh"
 EXT=0;
+
+if [ -d $RESULTS_PATH ]; then
+    rm -d $RESULTS_PATH
+fi
+mkdir $RESULTS_PATH
 
 now()
 {

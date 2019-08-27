@@ -7,4 +7,4 @@ tests:
     - ./tests/hajmdal.test.sh
   artifacts:
     paths:
-      - ./tests-results.txt
+      - ./tests-results/*
