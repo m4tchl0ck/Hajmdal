@@ -4,7 +4,7 @@ before_script:
 
 tests:
   script:
-    - ./tests/hajmdal.test.sh
+    - ./tests/tests-runner.sh ./tests/hajmdal.test.sh ./scripts/hajmdal.sh
   artifacts:
     paths:
       - ./tests-results/*
