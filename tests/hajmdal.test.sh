@@ -31,7 +31,8 @@ hajmdal_should_allow_when_is_plate_allowed_is_called()
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_not_return_error_when_open_gate_is_called
 hajmdal_should_not_return_error_when_open_gate_is_called()
 {
-    local result=$($SUT open_gate --gpio 17 --sleep 0 2>&1)
+    local result=""
+    result=$($SUT open_gate --gpio 17 --sleep 0 2>&1)
     
     if [ $? -ne 0 ]; then
         echo "Error $?" >&2
@@ -43,7 +44,8 @@ hajmdal_should_not_return_error_when_open_gate_is_called()
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_read_the_plates_when_read_the_plates_is_called
 hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 {
-    local result=( $($SUT read_the_plates --file "tests/data/h786poj.jpg" 2>&1) )
+    local result=""
+    result=( $($SUT read_the_plates --file "tests/data/h786poj.jpg" 2>&1) )
 
     if [ $? -eq 0 ]; then
         assert_equal "H786P0J" ${result[0]}
@@ -68,7 +70,8 @@ hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_create_a_photo_file_when_take_a_photo_is_called
 hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
 {
-    local result=$($SUT take_a_photo --device /dev/video0 --file $RESULTS_PATH/img0.jpg 2>&1)
+    local result=""
+    result=$($SUT take_a_photo --device /dev/video0 --file $RESULTS_PATH/img0.jpg 2>&1)
 
     if [ -e "$RESULTS_PATH/img0.jpg" ]; then
         true
@@ -82,7 +85,8 @@ hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_error_when_not_know_operation_is_called
 hajmdal_should_write_error_when_not_know_operation_is_called()
 {
-    local result=$($SUT blah 2>&1)
+    local result=""
+     result=$($SUT blah 2>&1)
 
     assert_equal "'blah' is unknown operation name" "$result"
 }
@@ -90,7 +94,8 @@ hajmdal_should_write_error_when_not_know_operation_is_called()
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_hello_world_when_hw_operation_is_called
 hajmdal_should_write_hello_world_when_hw_operation_is_called()
 {
-    local result=$($SUT hw)
+    local result=""
+    result=$($SUT hw)
 
     assert_equal "Hello world" "$result"
 }
