@@ -1,5 +1,24 @@
 #!/bin/bash
 
+read_the_plates()
+{
+    while [[ $# -gt 0 ]]
+    do
+        key="$1"
+
+        case $key in
+            -f|--file)
+            local file="$2"
+            ;;
+        esac
+        
+        shift # past argument
+        shift # past value
+    done
+
+    alpr -c eu $file | grep -Po '(?<=\s-\s)[\w\d]+(?=\s+confidence:)'
+}
+
 take_a_photo()
 {
     while [[ $# -gt 0 ]]
