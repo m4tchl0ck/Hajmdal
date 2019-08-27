@@ -2,7 +2,23 @@
 
 take_a_photo()
 {
-    fswebcam --no-banner --device "/dev/video0" "./img.jpg"
+    while [[ $# -gt 0 ]]
+    do
+        key="$1"
+
+        case $key in
+            -d|--device)
+            local device="$2"
+            ;;
+            -f|--file)
+            local file="$2"
+            ;;
+        esac
+        
+        shift # past argument
+        shift # past value
+    done
+    fswebcam --no-banner --device $device $file
 }
 
 hw()
