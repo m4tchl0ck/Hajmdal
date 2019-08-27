@@ -1,5 +1,31 @@
 #!/bin/bash
 
+open_gate()
+{
+    while [[ $# -gt 0 ]]
+    do
+        key="$1"
+
+        case $key in
+            --gpio)
+            local gpio="$2"
+            ;;
+            --sleep)
+            local sleep="$2"
+            ;;
+        esac
+
+        shift # past argument
+        shift # past value
+    done
+
+    echo $gpio > /sys/class/gpio/export
+    echo "out" > /sys/class/gpio/gpio$gpio/direction
+    echo "1" > /sys/class/gpio/gpio$gpio/value
+    sleep $sleep
+    echo "0" > /sys/class/gpio/gpio$gpio/value
+}
+
 read_the_plates()
 {
     while [[ $# -gt 0 ]]

@@ -2,6 +2,18 @@
 
 TEST_CASES=( )
 
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_not_return_error_when_open_gate_is_called
+hajmdal_should_not_return_error_when_open_gate_is_called()
+{
+    local result=$($SUT open_gate --gpio 17 --sleep 0 2>&1)
+    
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_read_the_plates_when_read_the_plates_is_called
 hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 {
