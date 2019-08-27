@@ -2,6 +2,14 @@
 
 TEST_CASES=( )
 
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_error_when_not_know_operation_is_called
+hajmdal_should_write_error_when_not_know_operation_is_called()
+{
+    local result=$($SUT blah 2>&1)
+
+    assert_equal "'blah' is unknown operation name" "$result"
+}
+
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_hello_world_when_hw_operation_is_called
 hajmdal_should_write_hello_world_when_hw_operation_is_called()
 {
