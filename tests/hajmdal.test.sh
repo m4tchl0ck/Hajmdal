@@ -1,8 +1,5 @@
 #!/bin/bash
 
-TEST_CASES=( )
-
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_not_allow_when_is_plate_not_allowed_is_called
 test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
 {
     local result="";
@@ -15,7 +12,6 @@ test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
     fi
 }
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_allow_when_is_plate_allowed_is_called
 test_hajmdal_should_allow_when_is_plate_allowed_is_called()
 {
     local result="";
@@ -28,7 +24,6 @@ test_hajmdal_should_allow_when_is_plate_allowed_is_called()
     fi
 }
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_not_return_error_when_open_gate_is_called
 test_hajmdal_should_not_return_error_when_open_gate_is_called()
 {
     local result=""
@@ -41,7 +36,6 @@ test_hajmdal_should_not_return_error_when_open_gate_is_called()
     fi
 }
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_read_the_plates_when_read_the_plates_is_called
 test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 {
     local result=""
@@ -67,7 +61,6 @@ test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
     fi
 }
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_create_a_photo_file_when_take_a_photo_is_called
 test_hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
 {
     local result=""
@@ -82,7 +75,6 @@ test_hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
     fi
 }
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_error_when_not_know_operation_is_called
 test_hajmdal_should_write_error_when_not_know_operation_is_called()
 {
     local result=""
@@ -91,7 +83,6 @@ test_hajmdal_should_write_error_when_not_know_operation_is_called()
     assert_equal "'blah' is unknown operation name" "$result"
 }
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_hello_world_when_hw_operation_is_called
 test_hajmdal_should_write_hello_world_when_hw_operation_is_called()
 {
     local result=""
