@@ -2,10 +2,10 @@
 
 TEST_CASES=( )
 
-TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_hello_world
-hajmdal_should_write_hello_world()
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_write_hello_world_when_hw_operation_is_called
+hajmdal_should_write_hello_world_when_hw_operation_is_called()
 {
-    local result=$($SUT)
+    local result=$($SUT hw)
 
     assert_equal "Hello world" "$result"
 }

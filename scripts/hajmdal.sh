@@ -1,3 +1,8 @@
 #!/bin/sh
 
-echo "Hello world" >&1
+hw()
+{
+    echo "Hello world" >&1
+}
+
+"$@"
