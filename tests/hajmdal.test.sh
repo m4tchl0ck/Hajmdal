@@ -2,6 +2,31 @@
 
 TEST_CASES=( )
 
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_read_the_plates_when_read_the_plates_is_called
+hajmdal_should_read_the_plates_when_read_the_plates_is_called()
+{
+    local result=( $($SUT read_the_plates --file "tests/data/h786poj.jpg" 2>&1) )
+
+    if [ $? -eq 0 ]; then
+        assert_equal "H786P0J" ${result[0]}
+        assert_equal "HC786P0J" ${result[1]}
+        assert_equal "H3786P0J" ${result[2]}
+        assert_equal "HG786P0J" ${result[3]}
+        assert_equal "HH786P0J" ${result[4]}
+        assert_equal "H786PDJ" ${result[5]}
+        assert_equal "H786POJ" ${result[6]}
+        assert_equal "MH786P0J" ${result[7]}
+        assert_equal "H786PQJ" ${result[8]}
+        assert_equal "UH786P0J" ${result[9]}
+    fi
+    
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo ${result[*]} >&2
+        false
+    fi
+}
+
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_create_a_photo_file_when_take_a_photo_is_called
 hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
 {
