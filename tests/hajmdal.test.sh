@@ -140,6 +140,8 @@ write_result()
 
 echo "$(now) Tests started" > $RESULT
 
+TEST_CASES=( $(compgen -A function | grep test_) )
+
 for test_case in ${TEST_CASES[@]}; do
     start_at=$(now)
     result=$($test_case)
