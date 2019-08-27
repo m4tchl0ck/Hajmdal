@@ -4,7 +4,7 @@ test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
 {
     . "$SUT"
     local result="";
-    result=$(is_plate_allowed --plates "SK44444 SK00442" --data-file "tests/data/plates.txt")
+    result=$(is_plate_allowed --plates "SK44444 SK00442" --data-file "tests/data/plates.txt" 2>&1)
 
     if [ $? -eq 0 ]; then
         echo "Error $?" >&2
