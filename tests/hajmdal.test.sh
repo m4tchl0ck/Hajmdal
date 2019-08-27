@@ -75,14 +75,6 @@ test_hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
     fi
 }
 
-test_hajmdal_should_write_error_when_not_know_operation_is_called()
-{
-    local result=""
-     result=$($SUT blah 2>&1)
-
-    assert_equal "'blah' is unknown operation name" "$result"
-}
-
 test_hajmdal_should_write_hello_world_when_hw_operation_is_called()
 {
     local result=""
