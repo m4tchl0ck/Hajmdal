@@ -2,8 +2,9 @@
 
 test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
 {
+    . "$SUT"
     local result="";
-    result=$($SUT is_plate_allowed --plates "SK44444 SK00442" --data-file "tests/data/plates.txt")
+    result=$(is_plate_allowed --plates "SK44444 SK00442" --data-file "tests/data/plates.txt")
 
     if [ $? -eq 0 ]; then
         echo "Error $?" >&2
@@ -14,8 +15,9 @@ test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
 
 test_hajmdal_should_allow_when_is_plate_allowed_is_called()
 {
+    . "$SUT"
     local result="";
-    result=$($SUT is_plate_allowed --plates "SK12345 SK00442" --data-file "tests/data/plates.txt" 2>&1)
+    result=$(is_plate_allowed --plates "SK12345 SK00442" --data-file "tests/data/plates.txt" 2>&1)
 
     if [ $? -ne 0 ]; then
         echo "Error $?" >&2
@@ -26,8 +28,9 @@ test_hajmdal_should_allow_when_is_plate_allowed_is_called()
 
 test_hajmdal_should_not_return_error_when_open_gate_is_called()
 {
+    . "$SUT"
     local result=""
-    result=$($SUT open_gate --gpio 17 --sleep 0 2>&1)
+    result=$(open_gate --gpio 17 --sleep 0 2>&1)
     
     if [ $? -ne 0 ]; then
         echo "Error $?" >&2
@@ -38,8 +41,9 @@ test_hajmdal_should_not_return_error_when_open_gate_is_called()
 
 test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 {
+    . "$SUT"
     local result=""
-    result=( $($SUT read_the_plates --file "tests/data/h786poj.jpg" 2>&1) )
+    result=( $(read_the_plates --file "tests/data/h786poj.jpg" 2>&1) )
 
     if [ $? -eq 0 ]; then
         assert_equal "H786P0J" ${result[0]}
@@ -63,8 +67,9 @@ test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 
 test_hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
 {
+    . "$SUT"
     local result=""
-    result=$($SUT take_a_photo --device /dev/video0 --file $RESULTS_PATH/img0.jpg 2>&1)
+    result=$(take_a_photo --device /dev/video0 --file $RESULTS_PATH/img0.jpg 2>&1)
 
     if [ -e "$RESULTS_PATH/img0.jpg" ]; then
         true
@@ -77,8 +82,9 @@ test_hajmdal_should_create_a_photo_file_when_take_a_photo_is_called()
 
 test_hajmdal_should_write_hello_world_when_hw_operation_is_called()
 {
+    . "$SUT"
     local result=""
-    result=$($SUT hw)
+    result=$(hw)
 
     assert_equal "Hello world" "$result"
 }
@@ -102,7 +108,7 @@ assert_equal()
 
 RESULTS_PATH="tests-results"
 RESULT="$RESULTS_PATH/results.txt"
-SUT="scripts/hajmdal.sh"
+SUT=scripts/hajmdal.sh
 EXT=0;
 
 if [ -d $RESULTS_PATH ]; then
