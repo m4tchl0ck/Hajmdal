@@ -1,5 +1,10 @@
 #!/bin/bash
 
+take_a_photo()
+{
+    fswebcam --no-banner --device "/dev/video0" "./img.jpg"
+}
+
 hw()
 {
     echo "Hello world" >&1
