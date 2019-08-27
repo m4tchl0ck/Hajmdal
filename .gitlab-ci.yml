@@ -1,0 +1,10 @@
+before_script:
+  - chmod -c 755 scripts/*
+  - chmod -c 755 tests/*
+
+tests:
+  script:
+    - ./tests/hajmdal.test.sh
+  artifacts:
+    paths:
+      - ./tests-results.txt

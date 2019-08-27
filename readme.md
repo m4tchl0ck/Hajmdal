@@ -18,7 +18,7 @@ How to recognize registrations on [Raspberry Pi] (https://www.raspberrypi.org/),
 
 ## To Do
 
-1. Environment configuration
+1. [Environment configuration](gitlab-runner)
 2. We're taking a picture
 3. We read the registration from the photo
 4. We display the status on GPIO (We open the barrier)
