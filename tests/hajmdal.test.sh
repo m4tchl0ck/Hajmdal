@@ -2,6 +2,32 @@
 
 TEST_CASES=( )
 
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_not_allow_when_is_plate_not_allowed_is_called
+hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
+{
+    local result="";
+    result=$($SUT is_plate_allowed --plates "SK44444 SK00442" --data-file "tests/data/plates.txt")
+
+    if [ $? -eq 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
+TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_allow_when_is_plate_allowed_is_called
+hajmdal_should_allow_when_is_plate_allowed_is_called()
+{
+    local result="";
+    result=$($SUT is_plate_allowed --plates "SK12345 SK00442" --data-file "tests/data/plates.txt" 2>&1)
+
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
 TEST_CASES[${#TEST_CASES[@]}]=hajmdal_should_not_return_error_when_open_gate_is_called
 hajmdal_should_not_return_error_when_open_gate_is_called()
 {

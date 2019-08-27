@@ -1,5 +1,33 @@
 #!/bin/bash
 
+function is_plate_allowed(){
+    while [[ $# -gt 0 ]]
+    do
+        key="$1"
+
+        case $key in
+            --plates)
+            local plates=( $2 )
+            ;;
+            --data-file)
+            local data_file="$2"
+            ;;
+        esac
+        
+        shift # past argument
+        shift # past value
+    done
+
+    for plate in "${plates[@]}"
+    do
+        if grep -q $plate $data_file; then
+            return 0
+        fi
+    done
+
+    return 1
+}
+
 open_gate()
 {
     while [[ $# -gt 0 ]]
