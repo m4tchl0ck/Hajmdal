@@ -2,6 +2,124 @@
 
 . ./tests/tests-helpers.sh
 
+test_is_car_allowed_should_call_is_plate_allowed_with_correct_arguments()
+{
+    . "$SUT"
+ 
+    declare -a called_take_photo
+    called_take_photo[0]=1
+    take_a_photo()
+    {
+        true
+    }
+
+    read_the_plates()
+    {
+        echo "123"
+        echo "456"
+        echo "789"
+    }
+
+    is_plate_allowed()
+    {
+        assert_equal "--plates" $1
+        res=$?
+        local plates=( $2 )
+        assert_equal "123 456 789" "${plates[*]}"
+        res=$(($?+$res))
+        assert_equal "--data-file" $3
+        res=$(($?+$res))
+        assert_equal "some-data-file" $4
+        res=$(($?+$res))
+        if [ $res -gt 0 ]; then
+            false
+        fi
+    }
+
+    local result="";
+    result=$(is_car_allowed --cam some-cam --img some-img-file --data-file some-data-file)
+
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
+test_is_car_allowed_should_call_read_the_plates_with_correct_arguments()
+{
+    . "$SUT"
+
+    take_a_photo()
+    {
+        return 0
+    }
+
+    read_the_plates()
+    {
+        assert_equal "--file" $1
+        res=$?
+        assert_equal "some-img-file" $2
+        res=$(($?+$res))
+        if [ $res -gt 0 ]; then
+            false
+        fi
+    }
+
+    is_plate_allowed()
+    {
+        return 0
+    }
+
+    local result="";
+    result=$(is_car_allowed --cam some-cam --img some-img-file --data-file some-data-file)
+
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
+test_is_car_allowed_should_call_take_a_photo_with_correct_arguments()
+{
+    . "$SUT"
+
+    take_a_photo()
+    {
+        assert_equal "--device" $1
+        res=$?
+        assert_equal "some-cam" $2
+        res=$(($?+$res))
+        assert_equal "--file" $3
+        res=$(($?+$res))
+        assert_equal "some-img-file" $4
+        res=$(($?+$res))
+        if [ $res -gt 0 ]; then
+            false
+        fi
+    }
+
+    read_the_plates()
+    {
+        return 0
+    }
+
+    is_plate_allowed()
+    {
+        return 0
+    }
+
+    local result="";
+    result=$(is_car_allowed --cam some-cam --img some-img-file --data-file some-data-file)
+
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
 test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
 {
     . "$SUT"
