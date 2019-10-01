@@ -23,3 +23,7 @@ How to recognize registrations on [Raspberry Pi] (https://www.raspberrypi.org/),
 3. [We read the registration from the photo](read-the-plates.md)
 4. [We display the status on GPIO (We open the gate)](open-gate.md)
 5. Check if the registration is in the file
+
+## Ta Da
+
+![testing](testing.gif)
