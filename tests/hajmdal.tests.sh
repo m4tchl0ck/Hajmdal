@@ -41,6 +41,32 @@ test_hajmdal_should_not_return_error_when_open_gate_is_called()
     fi
 }
 
+test_read_the_plates_should_return_1_when_plates_not_found()
+{
+    . "$SUT"
+    local result=""
+    result=( $(read_the_plates --file "tests/data/none.jpg" 2>&1) )
+
+    if [ $? -ne 1 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
+test_read_the_plates_should_return_0_when_plates_found()
+{
+    . "$SUT"
+    local result=""
+    result=( $(read_the_plates --file "tests/data/h786poj.jpg" 2>&1) )
+
+    if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    fi
+}
+
 test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
 {
     . "$SUT"

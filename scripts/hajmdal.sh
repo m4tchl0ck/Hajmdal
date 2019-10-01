@@ -70,7 +70,12 @@ read_the_plates()
         shift # past value
     done
 
-    alpr -c eu $file | grep -Po '(?<=\s-\s)[\w\d]+(?=\s+confidence:)'
+    plates=( $(alpr -c eu $file | grep -Po '(?<=\s-\s)[\w\d]+(?=\s+confidence:)') )
+    if [ ${#plates[@]} -eq 0 ]; then
+        false
+    else
+        echo "${plates[@]}"
+    fi
 }
 
 take_a_photo()
