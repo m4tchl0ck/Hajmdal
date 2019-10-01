@@ -1,5 +1,7 @@
 #!/bin/bash
 
+. ./tests/tests-helpers.sh
+
 test_hajmdal_should_not_allow_when_is_plate_not_allowed_is_called()
 {
     . "$SUT"
@@ -88,20 +90,3 @@ test_hajmdal_should_write_hello_world_when_hw_operation_is_called()
 
     assert_equal "Hello world" "$result"
 }
-
-########################################
-
-assert_equal()
-{
-    expected_value=$1
-    value=$2
-
-    if [ "$value" = "$expected_value" ]; then
-        true
-    else
-        echo "expected: '$expected_value', but was '$value'" >&2
-        false
-    fi
-}
-
-########################################
