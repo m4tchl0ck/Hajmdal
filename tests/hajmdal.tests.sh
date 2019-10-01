@@ -67,7 +67,7 @@ test_read_the_plates_should_return_0_when_plates_found()
     fi
 }
 
-test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
+test_read_the_plates_should_return_plates_when_plates_found()
 {
     . "$SUT"
     local result=""
@@ -84,9 +84,7 @@ test_hajmdal_should_read_the_plates_when_read_the_plates_is_called()
         assert_equal "MH786P0J" ${result[7]}
         assert_equal "H786PQJ" ${result[8]}
         assert_equal "UH786P0J" ${result[9]}
-    fi
-    
-    if [ $? -ne 0 ]; then
+    else
         echo "Error $?" >&2
         echo ${result[*]} >&2
         false
