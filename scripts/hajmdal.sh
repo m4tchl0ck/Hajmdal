@@ -1,6 +1,6 @@
 #!/bin/bash
 
-function is_plate_allowed(){
+is_plate_allowed(){
     while [[ $# -gt 0 ]]
     do
         key="$1"
