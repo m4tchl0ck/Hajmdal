@@ -7,7 +7,7 @@ SUT=$2
 EXT=0;
 
 if [ -d $RESULTS_PATH ]; then
-    rm -d $RESULTS_PATH
+    rm -d -r $RESULTS_PATH
 fi
 mkdir $RESULTS_PATH
 
