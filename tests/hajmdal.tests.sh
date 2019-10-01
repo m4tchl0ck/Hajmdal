@@ -2,6 +2,49 @@
 
 . ./tests/tests-helpers.sh
 
+test_main()
+{
+    . "$SUT"
+
+    open_gate()
+    {
+        return 0
+    }
+
+    Foo="0"
+    is_car_allowed()
+    {
+        # assert_equal "--cam" $1
+        # res=$?
+        # assert_equal "/somewhere/cam0" $2
+        # res=$(($?+$res))
+        # assert_equal "--img" $3
+        # res=$(($?+$res))
+        # assert_equal "some-img-folder/cam0.jpg" $4
+        # res=$(($?+$res))
+        # assert_equal "--data-file" $5
+        # res=$(($?+$res))
+        # assert_equal "some-data-file" $6
+        # res=$(($?+$res))
+        echo "---------------"
+        echo "$2"
+        echo "0 -> $Foo"
+        Foo="1"
+        echo "1 -> $Foo"
+        return 1
+    }
+    echo "0 -> $Foo"
+    local result="";
+    result=$(main --cameras "/somewhere/cam0" --images-forlder some-img-folder --data-file some-data-file --gpio some-gpio 2>&1)
+    echo "1 -> $Foo"
+    # if [ $? -ne 0 ]; then
+        echo "Error $?" >&2
+        echo $result >&2
+        false
+    # fi
+    
+}
+
 test_is_car_allowed_should_call_is_plate_allowed_with_correct_arguments()
 {
     . "$SUT"

@@ -125,6 +125,11 @@ is_car_allowed()
             local data_file="$2"
             ;;
         esac
+        case $key in
+            --gpio)
+            local gpio="$2"
+            ;;
+        esac
 
         shift # past argument
         shift # past value
@@ -132,17 +137,56 @@ is_car_allowed()
 
     res=$(take_a_photo --device $cam --file $img)
     if [ $? -ne 0 ]; then
-        echo $res >&2
         return 3
     fi
     plates=( $(read_the_plates --file $img) )
     if [ $? -ne 0 ]; then
-        echo ${plates[*]} >&2
         return 2
     fi
     res=$(is_plate_allowed --plates "${plates[*]}" --data-file $data_file)
     if [ $? -ne 0 ]; then
-        echo $res >&2
         return 1
     fi
+}
+
+main()
+{
+    while [[ $# -gt 0 ]]
+    do
+        key="$1"
+
+        case $key in
+            --cameras)
+            local cameras=( $2 )
+            ;;
+        esac
+        case $key in
+            --images-forlder)
+            local images_forlder="$2"
+            ;;
+        esac
+        case $key in
+            --data-file)
+            local data_file="$2"
+            ;;
+        esac
+        case $key in
+            --gpio)
+            local gpio="$2"
+            ;;
+        esac
+
+        shift # past argument
+        shift # past value
+    done
+
+    for camera in "${cameras[@]}"
+    do
+        img_file_name=$(basename $camera)
+        is_car_allowed --cam $camera --img $images_forlder/$img_file_name.jpg --data-file $data_file
+        if [ $? -eq 0 ]; then
+            open_gate --gpio $gpio --sleep 1
+            break
+        fi
+    done
 }
