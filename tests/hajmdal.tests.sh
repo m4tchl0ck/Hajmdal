@@ -75,15 +75,28 @@ test_read_the_plates_should_return_plates_when_plates_found()
 
     if [ $? -eq 0 ]; then
         assert_equal "H786P0J" ${result[0]}
+        res=$?
         assert_equal "HC786P0J" ${result[1]}
+        res=$(($?+$res))
         assert_equal "H3786P0J" ${result[2]}
+        res=$(($?+$res))
         assert_equal "HG786P0J" ${result[3]}
+        res=$(($?+$res))
         assert_equal "HH786P0J" ${result[4]}
+        res=$(($?+$res))
         assert_equal "H786PDJ" ${result[5]}
+        res=$(($?+$res))
         assert_equal "H786POJ" ${result[6]}
+        res=$(($?+$res))
         assert_equal "MH786P0J" ${result[7]}
+        res=$(($?+$res))
         assert_equal "H786PQJ" ${result[8]}
+        res=$(($?+$res))
         assert_equal "UH786P0J" ${result[9]}
+        res=$(($?+$res))
+        if [ $res -gt 0 ]; then
+            false
+        fi
     else
         echo "Error $?" >&2
         echo ${result[*]} >&2
